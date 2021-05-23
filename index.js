@@ -8,7 +8,7 @@ const discos=require('./routes/discos');
 const historia=require('./routes/historia');
 const fases=require('./routes/fases');
 const cors=require('cors')
-const port=process.env.PUERTO||5000
+const port=5000
 
 app.use(express.json())
 app.use(cors())
