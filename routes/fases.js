@@ -18,3 +18,38 @@ res.send(rows)
 catch(err){console.log(err)}
 }
 exports.fases=fases
+
+async function fasesId(req,res){
+try{
+let rowsNew=[]
+let id=req.params.id
+let sql=''
+switch(id){
+case '1':
+sql='SELECT fases.fase,fases.historia,fases.url_imagen,discos.nombre_disco,villanos.villanoFROM fases JOIN discos ON fases.id_disk = discos.id_disk JOIN villanos ON fases.villano=villanos.id  where fases.fase="fase 1"'
+rowsNew= await query(sql)
+res.send(rowsNew)
+break
+case '2':
+sql='SELECT fases.fase,fases.historia,fases.url_imagen,discos.nombre_disco,villanos.villano FROM fases JOIN discos ON fases.id_disk = discos.id_disk JOIN villanos ON fases.villano=villanos.id  where fases.fase="fase 2"'
+rowsNew= await query(sql)
+res.send(rowsNew)
+break
+case '3':
+sql='SELECT fases.fase,fases.historia,fases.url_imagen,discos.nombre_disco,villanos.villano FROM fases JOIN discos ON fases.id_disk = discos.id_disk JOIN villanos ON fases.villano=villanos.id  where fases.fase="fase 3"'
+rowsNew= await query(sql)
+res.send(rowsNew)
+break
+case '4':
+sql=`select fase,historia,discos.nombre_disco from fases JOIN discos ON fases.id_disk=discos.id_disk where fase='fase 4' `
+rowsNew= await query(sql)
+res.send(rowsNew)
+break
+}
+ 
+}
+catch(err){
+console.log(err)
+}
+}
+exports.fasesId=fasesId

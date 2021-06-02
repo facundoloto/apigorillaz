@@ -1,63 +1,67 @@
-const conexion=require('../database/database.js')
+let Querys=require("../database/querys.js")
 
-exports.miembros=(err,res)=>{
-conexion.query('SELECT*FROM miembros',(error,results)=>{
-if(error){console.log(error)}
-else{
-res.send(results)
-
+async function miembros(err,req){
+try {
+let sql='select*from miembros'
+req.send(await Querys.records(sql)) 
+} catch (error) {
+console.log(error)
 }
-})
-}
-//mostrar un solo registro por id y nombre
-
-exports.miembrosId=(req,res)=>{
-id=req.params.id
-conexion.query('SELECT*FROM miembros WHERE id_personajes=?',[id],(error,results)=>{
-if(error){console.log(error)}
-else{
-res.send(results)  
-
-}
-})}
-
-exports.miembrosNombre=(req,res)=>{
-nombre=req.params.nombre
-conexion.query('SELECT*FROM miembros WHERE nombre=?',[nombre],(error,results)=>{
-if(error){console.log(error)}
-else{
-res.send(results)
-
-}
-})}
-
-exports.exMiembros=(err,res)=>{
-conexion.query('SELECT*FROM ex_miembros',(error,results)=>{
-if(error){console.log(error)}
-else{res.send(results)
-
-}
-})
 }
 
 
-exports.exmimeborsId=(req,res)=>{
-    id=req.params.id
-    conexion.query('SELECT*FROM ex_miembros WHERE id=?',[id],(error,results)=>{
-    if(error){console.log(error)}
-    else{
-    res.send(results)  
-    
-    }
-    })}
-    
-    exports.miembrosNombre=(req,res)=>{
-    nombre=req.params.nombre
-    conexion.query('SELECT*FROM ex_miembros WHERE nombre=?',[nombre],(error,results)=>{
-    if(error){console.log(error)}
-    else{
-    res.send(results)
-    
-    }
-    })}
-    
+async function miembrosNombre (param,res){
+try{
+let nombre=param.params.nombre
+let sql=`select * from miembros where nombre='${nombre}' `
+res.send(await Querys.records(sql)) 
+}catch(err){console.log(err)}
+
+}
+
+async function miembrosId(req,res){ 
+try {
+//arreglar promesa pendiente
+let valor=req.params.id
+let sql=`select * from miembros where id_personajes= '${valor}'`
+res.send(await Querys.records(sql)) 
+} catch (error) {
+console.log(error)
+}
+}
+
+
+
+async function exmiembros(err,req){ 
+try {
+let sql="select*from ex_miembros"
+req.send(await Querys.records(sql)) 
+} catch (error) {
+console.log(error)
+}
+}
+
+async function exmiembrosId(req,res){
+try {
+let valor=req.params.id
+let sql=`select * from ex_miembros where id= '${valor}'`
+res.send(await Querys.records(sql))
+} catch (error) {
+console.log(error)
+}
+}
+
+async function exmiembrosNombre (req,res){
+try{
+let nombre=req.params.nombre
+let sql=`select * from ex_miembros where nombre='${nombre}' `
+res.send(await Querys.records(sql)) 
+}catch(err){console.log(err)}
+}
+
+exports.miembros=miembros
+exports.miembrosNombre=miembrosNombre
+exports.miembrosId=miembrosId
+exports.exmiembros=exmiembros
+exports.exmiembrosNombre=exmiembrosNombre
+exports.exmiembrosId=miembrosId

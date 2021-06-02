@@ -1,12 +1,10 @@
-const conexion=require('../database/database.js')
+let Querys=require("../database/querys.js")
+exports.historia=async(err,res)=>{
+try{
+let sql='select*from historia'
+res.send(await Querys.records(sql)) //tambien tenemos que poner await
 
-exports.historia=(err,res)=>{
-    try{
-        conexion.query('SELECT*FROM historia',(error,results)=>{
-            if(error){console.log(error)}
-            else{res.send(results)}
-        })
-    }catch(err){console.log(err)}
-    
- 
+}catch(err){console.log(err)}
+
+
 }

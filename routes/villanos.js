@@ -1,33 +1,34 @@
-const conexion=require('../database/database.js')
-exports.villanos=(err,res)=>{
-    try{
-        conexion.query('SELECT*FROM villanos',(error,results)=>{
-            if(error){console.log(error)}
-            else{
-            res.send(results)
+let Querys=require("../database/querys.js")
             
-            }
-           })
-    }catch(err){console.log(err)}
- }
+exports.villanos=async(err,req)=>{ //para usar la funcions records de la clase querys hay que declaral como async la funcion donde se va invocar ya que retona una promesa y asinc la resuelve
+try {
+//arreglar promesa pendiente
+let sql='select*from villanos'
+req.send(await Querys.records(sql)) //tambien tenemos que poner await
+} catch (error) {
+console.log(error)
+}
+}
 
- exports.villanosId=(req,res)=>{
-    id=req.params.id
-    conexion.query('SELECT*FROM villanos WHERE id=?',[id],(error,results)=>{
-    if(error){console.log(error)}
-    else{
-    res.send(results)  
-    
+exports.villanosId=async(req,res)=>{ //para usar la funcions records de la clase querys hay que declaral como async la funcion donde se va invocar ya que retona una promesa y asinc la resuelve
+    try {
+    let valor=req.params.id
+    let sql=`select*from villanos where id='${valor}'`
+    res.send(await Querys.records(sql)) //tambien tenemos que poner await
+    } catch (error) {
+    console.log(error)
     }
-    })}
+    }
 
-        
-        exports.villanosNombre=(req,res)=>{
-        nombre=req.params.nombre
-        conexion.query('SELECT*FROM villanos WHERE villano=?',[nombre],(error,results)=>{
-        if(error){console.log(error)}
-        else{
-        res.send(results)
-        
-        }
-        })}
+
+
+exports.villanosNombre=async (req,res)=>{
+try {
+//arreglar promesa pendiente
+let valor=req.params.nombre
+let sql=`select*from villanos where villano='${valor}'`
+res.send(await Querys.records(sql)) //tambien tenemos que poner await
+} catch (error) {
+console.log(error)
+}
+}
