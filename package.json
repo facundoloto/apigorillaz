@@ -5,9 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start":"node index.js" 
-    /*"start":"nodemon index.js", esta codigo lo usamos solo para desarollo local para subirlo a un servidor solo sirve star:node
-    "dev":"node index.js"
-    */
   },
   "author": "",
   "license": "ISC",
