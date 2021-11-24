@@ -64,4 +64,4 @@ exports.miembrosNombre=miembrosNombre
 exports.miembrosId=miembrosId
 exports.exmiembros=exmiembros
 exports.exmiembrosNombre=exmiembrosNombre
-exports.exmiembrosId=miembrosId
+exports.exmiembrosId=exmiembrosId
